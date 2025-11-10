@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="app.js"></script>
+    <title>Diagnosis</title>
+    <style>
+        form
+        {
+        margin-left:60px;
+        }
+        #grad1 {
+        background-color: #0cbaba;
+        background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
+        }
+        input[type=button] {
+        width: 100%;
+        }
+        .container-1 {
+         max-width: unset;
+         }
+        .stroke{
+        font-family: "Sans-serif";
+        }
+        .define{
+        margin-left: 40px;
+        margin-right: 70px;
+        }
+        #panel{
+        display: none;
+        }
+        #flip{
+        cursor: pointer;
+        }
+    </style>
+    <script> 
+         $(document).ready(function(){
+           $("#flip").click(function(){
+             $("#panel").toggle("slow");
+           });
+         });
+      </script>
+</head>
+<body>
+<br>
+<div class = "container-1" id="grad1">
+   <div class = "row">
+      <div class = "col-12-lg"><h1 class="text-center" style="color:white;">WELCOME TO STROKE RISK PREDICTOR</h1></div>
+   </div>
+</div>
+<br>
+
+<h2 class = "stroke">STROKE</h2>
+<div class = "define">
+<p>
+A stroke occurs when a blood vessel in the brain ruptures and bleeds, or when there’s a blockage in the blood supply to the brain. The rupture or blockage prevents blood and oxygen 
+from reaching the brain’s tissues. According to the Centers for Disease Control and Prevention (CDC)Trusted Source, stroke is a leading cause of death in the United States. Every year, 
+more than 795,000 U.S. people have a stroke.
+<br>
+There are three primary types of strokes:
+<ul>
+   <li><h4 class = "stroke">Transient Ischemic Attack (TIA)</h4> - Involves a blood clot that typically reverses on its own.</li>
+   <li><h4 class = "stroke">Ischemic Stroke</h4> - Involves a blockage caused by either a clot or plaque in the artery. The symptoms and complications of         ischemic stroke can last longer than those of a TIA, or may become permanent.</li>
+   <li><h4 class = "stroke">Hemorrhagic Stroke</h4> - It is caused by either a burst or leaking blood vessel that seeps into the brain.</li>
+</ul>
+By using your body parameters like <italic>glucose level, hypertension, bmi, residence type, heart attack, <strong>age</strong></italic> we can predict your
+chances of stroke in future.
+</p>
+<br>
+<div id="flip" class = "container text-center"><h5 style="color:blue;">Check your stroke risk chances and close it here...</h5></div>
+<br>
+<div id="panel">
+<div class="container">
+<div class="row">
+    <div class="col-lg-6">
+    <div class="card shadow-lg p-3 mb-5 bg-white text-black">
+        <form action="{{ url_for('result') }}" method="post">
+            <h3><center><p>STROKE RISK CALCULATOR</p></center></h3>
+    <label for="gender" class="form-label">Gender</label>
+    <select class="form-select" id="gender" name="gender">
+      <option value="1">Male</option>
+      <option value="0">Female</option>
+    </select>
+    <br>
+     <div class="form-group">
+    <label for="age">Age</label>
+    <input type="text" class="form-control" id="age"  name="age"/>
+  </div>
+  <div class="form-group">
+    <label for="hypertension" class="form-label">Hypertension</label>
+    <select class="form-select" id="hypertension" name="hypertension">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="heart_disease">Heart Disease</label>
+    <select class="form-select" id="heart_disease" name="heart_disease">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="ever_married">Marital Status</label>
+    <select class="form-select" id="ever_married" name="ever_married">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="work_type">Work Type</label>
+    <select class="form-select" id="work_type" name="work_type">
+      <option value="0">Government Job</option>
+      <option value="1">Unemployed</option>
+      <option value="2">Private</option>
+      <option value="3">Self-Employed</option>
+      <option value="4">Children/Student</option>
+    </select>
+  </div>
+            <div class="form-group">
+    <label for="Residence_type">Residence Type</label>
+    <select class="form-select" id="Residence_type" name="Residence_type">
+      <option value="1">Urban</option>
+      <option value="0">Rural</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="avg_glucose_level">Glucose Level</label>
+    <input type="text" class="form-control" id="avg_glucose_level" name="avg_glucose_level" placeholder = "Normal = 100 - 125 mg/dl"/>
+  </div>
+  <div class="form-group">
+    <label for="bmi">BMI</label>
+    <input type="text" class="form-control" id="bmi" name="bmi" placeholder = "Normal = 19.8 - 24.9" />
+  </div>
+    <div class="form-group">
+    <label for="smoking_status">Smoking Status</label>
+    <select class="form-select" id="smoking_status" name="smoking_status">
+      <option value="0">Not interested to mention</option>
+      <option value="1">Formerly Smoked</option>
+      <option value="2">Never Smoked</option>
+      <option value="3">Frequently Smoked</option>
+    </select>
+  </div>
+            <br>
+  <center><button class="btn btn-success">Submit</button></center>
+        </form>
+    </div>
+</div>
+   
+
+</div>
+</div>
+</div>
+<div class="define">
+<h3 class = "stroke">Symptoms of Stroke</h3>
+<p>
+The loss of blood flow to the brain damages tissues within the brain. Symptoms of a stroke show up in the body parts controlled by the damaged areas of the brain.
+
+The sooner a person having a stroke gets care, the better their outcome is likely to be. For this reason, it’s helpful to know the signs of a stroke so you can act quickly. Stroke symptoms can include:
+<ul>
+   <li>Paralysis</li>
+   <li>Numbness or weakness in the arm, face, and leg, especially on one side of the body</li>
+   <li>Trouble speaking or understanding others</li>
+   <li>slurred speech</li>
+   <li>Confusion, Disorientation, or lack of responsiveness</li>
+   <li>vision problems etc...</li>
+<ul>
+</p>
+
+</body>
+</html>
